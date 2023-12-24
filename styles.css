@@ -1,0 +1,10 @@
+#transcription-container {
+    margin-bottom: 20px;
+}
+
+.time-code {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    margin-right: 10px;
+}
