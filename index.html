@@ -1,17 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Player with Time Codes</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>23.8 Юля\Сериков\оплата</title>
+    <style>
+        #audioContainer {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 9999;
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        #audioContent {
+            margin-top: 50px;
+        }
+
+        /* Стили для редактируемого текста */
+        .editable {
+            border: 1px solid #ccc;
+            padding: 5px;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <div id="transcription-container"></div>
-    <audio controls id="audioPlayer">
-        <source src="https://github.com/IgorGeraskin22/transribe/raw/main/2.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
-    <script src="script.js"></script>
+    <div id="audioContainer">
+        <audio id="audioPlayer" controls>
+            <source src="https://github.com/IgorGeraskin22/transribe/raw/gh-pages/2.mp3">
+            Ваш браузер не поддерживает аудиоэлемент.
+        </audio>
+    </div>
+
+    <div id="audioContent">
+        <p></p>
+
+        <p>12.12 <span class="editable" contenteditable="true">Виталий/Новикова /еж.касание</span> <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Хорошо. У вас какие-то вопросы, так понимаю, сейчас возникли? Мария, пропали куда-то. Я имею в виду, у вас сейчас какие-то вопросы возникли, я так понял?</p>
+        <p><span class="name1 editable" contenteditable="true">НОВИКОВА</span> <a href="javascript:void(0);" onclick="jumpToTime(11)">0:00:11</a>  Ну, мы с вами договаривались, что вы посмотрите таблицу, я, собственно, ее вам отправила, хотела приданные комментарии дать, судить с вами, утвердить данную модель. Ну и, собственно, на этом мы с вами и закончили разговор.</p>
+        <p><span class="name1 editable" contenteditable="true">ВИТАЛИЙ</span> <a href="javascript:void(0);" onclick="jumpToTime(29)">0:00:29</a>  Понял. Сейчас смотрю, у вас количество менеджеров, планируете 6 делать?</p>
+        <p><span class="name1 editable" contenteditable="true">НОВИКОВА</span> <a href="javascript:void(0);" onclick="jumpToTime(36)">0:00:36</a>  Да.</p>
+        <p><span class="name1 editable" contenteditable="true">ВИТАЛИЙ</span> <a href="javascript:void(0);" onclick="jumpToTime(37)">0:00:37</a>  Два РОПа у вас будет, да?</p>
+
+        <p></p>
+        <p></p>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        function jumpToTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remainingSeconds = seconds % 60;
+
+            const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
+            audioPlayer.currentTime = seconds;
+            audioPlayer.play();
+            console.log(`Jumping to time: ${formattedTime}`);
+        }
+
+        function padZero(num) {
+            return num.toString().padStart(2, '0');
+        }
+    </script>
 </body>
 </html>
