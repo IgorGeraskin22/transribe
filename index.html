@@ -23,6 +23,8 @@
             border: 1px solid #ddd;
             padding: 5px;
             margin-bottom: 10px;
+            width: 100%; /* Добавлено: расширяется на всю ширину доступного пространства */
+            box-sizing: border-box; /* Добавлено: учитывает границы и отступы в общей ширине */
         }
     </style>
 </head>
@@ -36,50 +38,7 @@
 
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
-		    <p></p>
-			 <p></p>
             <p>12.12 Виталий/Новикова /еж.касание</p>
             <p><span style="color: #FF6347; font-weight: bold;"><span class="name1">ВИТАЛИЙ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Хорошо. У вас какие-то вопросы, так понимаю, сейчас возникли? Мария, пропали куда-то. Я имею в виду, у вас сейчас какие-то вопросы возникли, я так понял?</p>
             <p><span style="color: #FF6347; font-weight: bold;"><span class="name1">НОВИКОВА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(11)">0:00:11</a>  Ну, мы с вами договаривались, что вы посмотрите таблицу, я, собственно, ее вам отправила, хотела приданные комментарии дать, судить с вами, утвердить данную модель. Ну и, собственно, на этом мы с вами и закончили разговор.</p>
-            <p><span style="color: #FF6347; font-weight: bold;"><span class="name1">ВИТАЛИЙ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(29)">0:00:29</a>  Понял. Сейчас смотрю, у вас количество менеджеров, планируете 6 делать?</p>
-            <p><span style="color: #FF6347; font-weight: bold;"><span class="name1">НОВИКОВА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(36)">0:00:36</a>  Да.</p>
-            <p><span style="color: #FF6347; font-weight: bold;"><span class="name1">ВИТАЛИЙ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(37)">0:00:37</a>  Два РОПа у вас будет, да?</p>
-        </div>
-        <button onclick="saveContent()">Сохранить</button>
-    </div>
-
-    <script>
-        const audioPlayer = document.getElementById('audioPlayer');
-        const editableText = document.getElementById('editableText');
-
-        function jumpToTime(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            const remainingSeconds = seconds % 60;
-
-            const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
-            audioPlayer.currentTime = seconds;
-            audioPlayer.play();
-            console.log(`Jumping to time: ${formattedTime}`);
-        }
-
-        function padZero(num) {
-            return num.toString().padStart(2, '0');
-        }
-
-        function saveContent() {
-            // Сохраняем текст в локальное хранилище
-            localStorage.setItem('editableContent', editableText.innerHTML);
-            alert('Текст сохранен локально!');
-        }
-
-        // При загрузке страницы, восстанавливаем текст из локального хранилища
-        window.onload = function() {
-            const storedContent = localStorage.getItem('editableContent');
-            if (storedContent) {
-                editableText.innerHTML = storedContent;
-            }
-        }
-    </script>
-</body>
-</html>
+            <p><span style="color: #FF6347; font-weight: bold;"><span class="name1">ВИТАЛИЙ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(29)">
