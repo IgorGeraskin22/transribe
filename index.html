@@ -96,7 +96,7 @@
         }
 
         function jumpToTime(seconds) {
-            const startTime = seconds - 1; // Тайм-код за 2 секунды до указанного времени
+            const startTime = seconds - 1,5; // Тайм-код за 2 секунды до указанного времени
             const hours = Math.floor(startTime / 3600);
             const minutes = Math.floor((startTime % 3600) / 60);
             const remainingSeconds = startTime % 60;
