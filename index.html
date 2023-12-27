@@ -34,17 +34,17 @@
         </audio>
         <button onclick="skip(-2)">Назад</button>
         <button onclick="skip(2)">Вперёд</button>
+        <button onclick="jumpToTimeBackward()">Тайм-код назад</button>
+        <button onclick="jumpToTimeForward()">Тайм-код вперед</button>
     </div>
 
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
             <br />
-             
-			 
-			 
-            
 			
-			 <p></p>
+			
+			
+			<p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Отлично, хорошо.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ПИЛИПЕНКО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(2)">0:00:02</a>  Да, отлично, отлично. Алло.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(4)">0:00:04</a>  Да, да, да, у меня что-то сегодня скайп вообще еле-еле работает. Я уже его переустанавливала раза три.</p>
@@ -172,6 +172,10 @@
 			
 			
 			
+			
+			
+			
+			
         </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
@@ -185,7 +189,7 @@
         }
 
         function jumpToTime(seconds) {
-            const startTime = seconds - 2; // Тайм-код за 2 секунды до указанного времени
+            const startTime = Math.max(0, Math.min(audioPlayer.duration - 2, seconds)); // Ограничиваем диапазон от 0 до (длительность - 2)
             const hours = Math.floor(startTime / 3600);
             const minutes = Math.floor((startTime % 3600) / 60);
             const remainingSeconds = startTime % 60;
@@ -197,6 +201,16 @@
                 audioPlayer.play();
                 console.log(`Jumping to time: ${formattedTime}`);
             }, 2000);
+        }
+
+        function jumpToTimeBackward() {
+            const currentTime = audioPlayer.currentTime;
+            jumpToTime(currentTime - 0.5);
+        }
+
+        function jumpToTimeForward() {
+            const currentTime = audioPlayer.currentTime;
+            jumpToTime(currentTime + 0.5);
         }
 
         function padZero(num) {
