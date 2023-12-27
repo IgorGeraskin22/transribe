@@ -35,17 +35,18 @@
         <button onclick="skip(-2)">Назад</button>
         <button onclick="skip(2)">Вперёд</button>
         <button onclick="increasePlaybackSpeed()">Увеличить скорость</button>
+        <span id="speedIndicator">Скорость: 1</span>
     </div>
+
 
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
             <br />
-             
-			 
-			 
-            
 			
-			 <p></p>
+			
+			
+			
+			<p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Отлично, хорошо.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ПИЛИПЕНКО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(2)">0:00:02</a>  Да, отлично, отлично. Алло.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(4)">0:00:04</a>  Да, да, да, у меня что-то сегодня скайп вообще еле-еле работает. Я уже его переустанавливала раза три.</p>
@@ -173,6 +174,7 @@
 			
 			
 			
+            
         </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
@@ -180,6 +182,7 @@
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
         const editableText = document.getElementById('editableText');
+        const speedIndicator = document.getElementById('speedIndicator');
         let playbackSpeed = 1;
 
         function skip(time) {
@@ -189,6 +192,7 @@
         function increasePlaybackSpeed() {
             playbackSpeed += 1;
             audioPlayer.playbackRate = playbackSpeed;
+            speedIndicator.textContent = `Скорость: ${playbackSpeed}`;
         }
 
         function jumpToTime(seconds) {
