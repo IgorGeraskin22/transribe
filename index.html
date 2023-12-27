@@ -30,6 +30,10 @@
             align-items: center;
             gap: 10px;
         }
+
+        #timeIndicator {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -44,6 +48,7 @@
             <button onclick="increasePlaybackSpeed()">Увеличить скорость</button>
             <button onclick="decreasePlaybackSpeed()">Уменьшить скорость</button>
             <span id="speedIndicator">Скорость: 1</span>
+            <span id="timeIndicator"></span>
         </div>
     </div>
 
@@ -54,11 +59,7 @@
 			
 			
 			
-			
-			
-			
-			
-            <p></p>
+           <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Отлично, хорошо.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ПИЛИПЕНКО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(2)">0:00:02</a>  Да, отлично, отлично. Алло.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(4)">0:00:04</a>  Да, да, да, у меня что-то сегодня скайп вообще еле-еле работает. Я уже его переустанавливала раза три.</p>
@@ -181,14 +182,12 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ПИЛИПЕНКО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1016)">0:16:56</a>  Да, давайте на связи. Спасибо огромное.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(1019)">0:16:59</a>  Хорошего вечера вам достанем.</p>
 <p></p>
-			
-			
-			
-			
-			
-			
-			
-			
+		   
+		   
+		   
+		   
+		   
+		   
         </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
@@ -197,6 +196,7 @@
         const audioPlayer = document.getElementById('audioPlayer');
         const editableText = document.getElementById('editableText');
         const speedIndicator = document.getElementById('speedIndicator');
+        const timeIndicator = document.getElementById('timeIndicator');
         let playbackSpeed = 1;
 
         function skip(time) {
@@ -221,7 +221,7 @@
         function updatePlaybackTimeIndicator() {
             const currentTime = audioPlayer.currentTime;
             const formattedTime = formatTime(currentTime);
-            console.log(`Текущее время: ${formattedTime}`);
+            timeIndicator.textContent = `Текущее время: ${formattedTime}`;
         }
 
         function formatTime(seconds) {
