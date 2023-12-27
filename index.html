@@ -55,12 +55,11 @@
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
             <br />
-            
-			
-			
-			
-			
-			<p></p>
+       
+	   
+	   
+	   
+	   <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Отлично, хорошо.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ПИЛИПЕНКО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(2)">0:00:02</a>  Да, отлично, отлично. Алло.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(4)">0:00:04</a>  Да, да, да, у меня что-то сегодня скайп вообще еле-еле работает. Я уже его переустанавливала раза три.</p>
@@ -183,12 +182,12 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ПИЛИПЕНКО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1016)">0:16:56</a>  Да, давайте на связи. Спасибо огромное.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span> <a href="javascript:void(0);" onclick="jumpToTime(1019)">0:16:59</a>  Хорошего вечера вам достанем.</p>
 <p></p>
-			
-			
-			
-			
-			
-			
+	   
+	   
+	   
+	   
+	   
+	   
         </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
@@ -223,9 +222,6 @@
             const currentTime = audioPlayer.currentTime;
             const formattedTime = formatTime(currentTime);
             timeIndicator.textContent = `Текущее время: ${formattedTime}`;
-            setTimeout(() => {
-                timeIndicator.textContent = ''; // Очищаем индикатор после 1 секунды
-            }, 1000);
         }
 
         function formatTime(seconds) {
