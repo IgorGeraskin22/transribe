@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editable Content with Video Player</title>
+    <title>Editable Content with YouTube Video</title>
     <style>
         #videoContainer {
             position: fixed;
@@ -33,27 +33,23 @@
 <body>
     <!-- Видео контейнер -->
     <div id="videoContainer">
-        <!-- Видеоплеер с кнопками управления -->
-        <video id="videoPlayer" controls>
-            <source src="URL_ВАШЕГО_ВИДЕО.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видеоэлемент.
-        </video>
-        <!-- Кнопки управления видео -->
+        <!-- YouTube видео встраивается через iframe -->
+        <iframe width="1236" height="695" src="https://www.youtube.com/embed/PGllK6QepXo" title="Обзор Super-Link. Зарабатывай больше в своём бизнесе!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- Кнопки управления видео (если необходимо) -->
         <button onclick="skip(-2)">Назад</button>
         <button onclick="skip(2)">Вперёд</button>
         <button onclick="changeSpeed(-0.1)">Уменьшить скорость</button>
         <button onclick="changeSpeed(0.1)">Увеличить скорость</button>
-        <!-- Индикатор скорости воспроизведения -->
+        <!-- Индикатор скорости воспроизведения (если необходимо) -->
         <span id="speedIndicator">Скорость: 1.0x</span>
     </div>
 
-    
-	
-	
-
-
-
-<p>1.mp4</p>
+    <!-- Контент для редактирования и кнопка сохранения -->
+    <div id="videoContent">
+        <div class="editable" contenteditable="true" id="editableText">
+		
+		
+		<p>1.mp4</p>
 <p></p>
 <p></p>
 <p><a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>:  Самый первый урок любого моего курса по рассылкам это теория массовых рассылок. Абсолютно не важно занимались ли вы ранее рассылками, то есть делали ли вы рассылки с какой-то программки у себя на компьютере, либо же вы работали с каким-то коммерческим сервисом массовых рассылок. Если вы начинаете прохождение данного курса, то именно в этом разделе, то есть в разделе теории, будут ответы на возможные вопросы относительно того, куда попала ваша рассылка, в инбокс, либо в спам и так далее. То есть иногда по вопросам, которые вы задаете мне потом в поддержку, я понимаю, что какие-то блоки обучения вы просто пропустили, либо просто проигнорировали.</p>
@@ -119,17 +115,11 @@
 <p></p>
 <p></p>
 <p></p>
-
-
-   
-
-
-
-
-
-
-   <div id="videoContent">
-        <div class="editable" contenteditable="true" id="editableText">
+		
+		
+		
+		
+		
             <br />
             <!-- Ваш редактируемый контент здесь -->
         </div>
@@ -137,31 +127,19 @@
     </div>
 
     <script>
-        // Получаем элементы DOM
-        const videoPlayer = document.getElementById('videoPlayer');
-        const editableText = document.getElementById('editableText');
-        const speedIndicator = document.getElementById('speedIndicator');
-
-        // Функция для перемотки видео
+        // Функции управления видео (если необходимо)
         function skip(time) {
-            videoPlayer.currentTime += time;
+            // Реализация функции skip для YouTube видео (при необходимости)
         }
 
-        // Функция для прыжка к определенному моменту времени (аналогично аудио)
-        function jumpToTime(seconds) {
-            // Аналогично функции для аудио, если необходимо
+        function changeSpeed(amount) {
+            // Реализация функции changeSpeed для YouTube видео (при необходимости)
         }
 
         // Функция для сохранения редактируемого контента
         function saveContent() {
             localStorage.setItem('editableContent', editableText.innerHTML);
             alert('Текст сохранен локально!');
-        }
-
-        // Функция для изменения скорости воспроизведения
-        function changeSpeed(amount) {
-            videoPlayer.playbackRate += amount;
-            speedIndicator.textContent = `Скорость: ${videoPlayer.playbackRate.toFixed(1)}x`;
         }
 
         // При загрузке страницы восстанавливаем ранее сохраненный контент
