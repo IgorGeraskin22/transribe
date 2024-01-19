@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,22 +15,23 @@
             padding: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         #audioContent {
             margin-top: 50px;
         }
-        
+
         .editable {
             border: 1px solid #ddd;
             padding: 5px;
             margin-bottom: 10px;
         }
-        
+
         #speedIndicator {
             margin-left: 10px;
         }
     </style>
 </head>
+
 <body>
     <div id="audioContainer">
         <audio id="audioPlayer" controls>
@@ -49,11 +51,7 @@
 			
 			
 			
-			
-			
-			
-			
-			<p></p>
+            <p></p>
 <p>Мария: <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Да, слышно. Давайте обозначимся. Вы же, наверное, работаете сейчас? Сколько у вас вообще времени на меня?</p>
 <p>Жулидов:  <a href="javascript:void(0);" onclick="jumpToTime(7)">0:00:07</a>  Ну, прям минут пять, наверное, сейчас планерка начинается.</p>
 <p>Мария: <a href="javascript:void(0);" onclick="jumpToTime(12)">0:00:12</a>  Поняла. Расскажите вкратце, как дела, как настрой?</p>
@@ -128,8 +126,6 @@
 			
 			
 			
-			
-			
         </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
@@ -151,7 +147,7 @@
 
             const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
             audioPlayer.currentTime = startTime;
-            
+
             setTimeout(() => {
                 audioPlayer.play();
                 console.log(`Jumping to time: ${formattedTime}`);
@@ -172,12 +168,29 @@
             speedIndicator.textContent = `Скорость: ${audioPlayer.playbackRate.toFixed(1)}x`;
         }
 
-        window.onload = function() {
+        window.onload = function () {
             const storedContent = localStorage.getItem('editableContent');
             if (storedContent) {
                 editableText.innerHTML = storedContent;
             }
+
+            // Найти последнее слово
+            const words = editableText.innerText.split(' ');
+            const lastWord = words[words.length - 1];
+
+            // Создать обертку вокруг последнего слова и сделать его кликабельным
+            const clickableWord = document.createElement('span');
+            clickableWord.textContent = lastWord;
+            clickableWord.style.cursor = 'pointer';
+            clickableWord.addEventListener('click', function () {
+                // Вызов функции с учетом задержки
+                jumpToTime(audioPlayer.currentTime + 3);
+            });
+
+            // Заменить последнее слово кликабельным тегом
+            editableText.innerHTML = editableText.innerHTML.replace(lastWord, clickableWord.outerHTML);
         }
     </script>
 </body>
+
 </html>
