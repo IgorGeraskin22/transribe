@@ -38,6 +38,8 @@
         </audio>
         <button onclick="skip(-2)">Назад</button>
         <button onclick="skip(2)">Вперёд</button>
+        <button onclick="adjustStartTime(-1)">Уменьшить время старта</button>
+        <button onclick="adjustStartTime(1)">Увеличить время старта</button>
         <button onclick="adjustPlaybackTime(-5)">Отмотать назад</button>
         <button onclick="adjustPlaybackTime(5)">Перемотать вперёд</button>
         <button onclick="changeSpeed(-0.1)">Уменьшить скорость</button>
@@ -50,7 +52,8 @@
             <br />
 			
 			
-          <p></p>
+			
+			<p></p>
 <p>Мария: <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Да, слышно. Давайте обозначимся. Вы же, наверное, работаете сейчас? Сколько у вас вообще времени на меня?</p>
 <p>Жулидов:  <a href="javascript:void(0);" onclick="jumpToTime(7)">0:00:07</a>  Ну, прям минут пять, наверное, сейчас планерка начинается.</p>
 <p>Мария: <a href="javascript:void(0);" onclick="jumpToTime(12)">0:00:12</a>  Поняла. Расскажите вкратце, как дела, как настрой?</p>
@@ -121,14 +124,12 @@
 <p>Жулидов:  <a href="javascript:void(0);" onclick="jumpToTime(726)">0:12:06</a>  Да. Ладно, тогда попробую сегодня эти вопросы задать. Ну, ладно, все, побежал я. Спасибо. Хорошо. Напишу еще. Бегите там.</p>
 <p>Мария: <a href="javascript:void(0);" onclick="jumpToTime(736)">0:12:16</a>  Пишите. До свидания.</p>
 <p></p>
-		
-		
-		
-		
-		
-		
-		
-		</div>
+
+
+
+
+
+	   </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
@@ -136,13 +137,14 @@
         const audioPlayer = document.getElementById('audioPlayer');
         const editableText = document.getElementById('editableText');
         const speedIndicator = document.getElementById('speedIndicator');
+        let startTime = 0;
 
         function skip(time) {
             audioPlayer.currentTime += time;
         }
 
         function jumpToTime(seconds) {
-            const startTime = seconds - 3;
+            startTime = seconds - 3;
             const hours = Math.floor(startTime / 3600);
             const minutes = Math.floor((startTime % 3600) / 60);
             const remainingSeconds = startTime % 60;
@@ -172,6 +174,18 @@
 
         function adjustPlaybackTime(offset) {
             audioPlayer.currentTime += offset;
+        }
+
+        function adjustStartTime(offset) {
+            startTime = Math.max(0, startTime + offset);
+            const hours = Math.floor(startTime / 3600);
+            const minutes = Math.floor((startTime % 3600) / 60);
+            const remainingSeconds = startTime % 60;
+
+            const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
+            audioPlayer.currentTime = startTime;
+
+            console.log(`Adjusted start time to: ${formattedTime}`);
         }
 
         window.onload = function() {
