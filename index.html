@@ -51,6 +51,9 @@
 			
 			
 			
+			
+			
+			
             <p></p>
 <p>Мария: <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Да, слышно. Давайте обозначимся. Вы же, наверное, работаете сейчас? Сколько у вас вообще времени на меня?</p>
 <p>Жулидов:  <a href="javascript:void(0);" onclick="jumpToTime(7)">0:00:07</a>  Ну, прям минут пять, наверное, сейчас планерка начинается.</p>
@@ -126,6 +129,10 @@
 			
 			
 			
+			
+			
+			
+			
         </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
@@ -174,21 +181,20 @@
                 editableText.innerHTML = storedContent;
             }
 
-            // Найти последнее слово
-            const words = editableText.innerText.split(' ');
-            const lastWord = words[words.length - 1];
+            // Разбить текст на символы
+            const characters = editableText.innerText.split('');
 
-            // Создать обертку вокруг последнего слова и сделать его кликабельным
-            const clickableWord = document.createElement('span');
-            clickableWord.textContent = lastWord;
-            clickableWord.style.cursor = 'pointer';
-            clickableWord.addEventListener('click', function () {
+            // Создать обертку вокруг последнего символа и сделать его кликабельным
+            const clickableChar = document.createElement('span');
+            clickableChar.textContent = characters[characters.length - 1];
+            clickableChar.style.cursor = 'pointer';
+            clickableChar.addEventListener('click', function () {
                 // Вызов функции с учетом задержки
                 jumpToTime(audioPlayer.currentTime + 3);
             });
 
-            // Заменить последнее слово кликабельным тегом
-            editableText.innerHTML = editableText.innerHTML.replace(lastWord, clickableWord.outerHTML);
+            // Заменить последний символ кликабельным тегом
+            editableText.innerHTML = editableText.innerHTML.replace(new RegExp(characters[characters.length - 1] + "$"), clickableChar.outerHTML);
         }
     </script>
 </body>
