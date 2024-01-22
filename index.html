@@ -41,12 +41,6 @@
         <button onclick="changeSpeed(-0.1)">Уменьшить скорость</button>
         <button onclick="changeSpeed(0.1)">Увеличить скорость</button>
         <span id="speedIndicator">Скорость: 1.0x</span>
-
-        <!-- Добавленные элементы в разметке -->
-        <input type="number" id="offsetInput" value="0">
-		<button onclick="decreaseOffset()">Время назад</button>
-        <button onclick="increaseOffset()">Время вперед</button>
-        
     </div>
 
     <div id="audioContent">
@@ -54,7 +48,12 @@
             <br />
 			
 			
-            <p></p>
+			
+			
+			
+			
+			
+			<p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">КРИСТИОГЛО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Я сразу, пока не забыл, есть актуальный вопрос, который надо решить. У нас в Силанте, как его фамилия, Алексей Силанте, бухгалтер, я у него запросил закрывающие документы, у нас там выяснилось, по какой момент именно. У нас подписано соглашение о переходе прав лицензии от меня как физлица на мое ООО со 2 ноября. После 2 ноября я там оплачивал счета, соответственно, эти счета идут, я оплачивал от себя, своего личного счета. Соответственно, сейчас есть некое расхождение, как раз в том, что… То есть, он предлагает следующий вариант, сейчас я озвучу.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">МАРИЯ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(44)">0:00:44</a>  Не может быть, потому что вы оплатили, как, получается, от другого лица.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">КРИСТИОГЛО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(51)">0:00:51</a>  Да, да, да. В общем, надо либо какое-то гарантийное письмо, у вас есть шаблон, либо переписать дату этого соглашения. Можно гарантийку просто.</p>
@@ -223,12 +222,13 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">МАРИЯ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(4330)">1:12:10</a>  Да, взаимно. До свидания, Сергей.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">КРИСТИОГЛО</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(4332)">1:12:12</a>  Всего доброго.</p>
 <p></p>
-       
-
-
-
-
-	   </div>
+			
+			
+			
+			
+			
+			
+        </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
@@ -242,8 +242,7 @@
         }
 
         function jumpToTime(seconds) {
-            const offset = parseFloat(document.getElementById('offsetInput').value) || 0;
-            const startTime = seconds + offset;
+            const startTime = seconds - 3;
             const hours = Math.floor(startTime / 3600);
             const minutes = Math.floor((startTime % 3600) / 60);
             const remainingSeconds = startTime % 60;
@@ -253,7 +252,7 @@
             
             setTimeout(() => {
                 audioPlayer.play();
-                console.log(`Jumping to time: ${formattedTime} (with offset: ${offset})`);
+                console.log(`Jumping to time: ${formattedTime}`);
             }, 2000);
         }
 
@@ -269,17 +268,6 @@
         function changeSpeed(amount) {
             audioPlayer.playbackRate += amount;
             speedIndicator.textContent = `Скорость: ${audioPlayer.playbackRate.toFixed(1)}x`;
-        }
-
-        function increaseOffset() {
-            const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) + 1;
-        }
-
-        function decreaseOffset() {
-            const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) - 1;
-            jumpToTime(audioPlayer.currentTime); // Применяем новое смещение времени сразу
         }
 
         window.onload = function() {
