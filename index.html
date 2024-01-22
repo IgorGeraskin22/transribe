@@ -41,6 +41,12 @@
         <button onclick="changeSpeed(-0.1)">Уменьшить скорость</button>
         <button onclick="changeSpeed(0.1)">Увеличить скорость</button>
         <span id="speedIndicator">Скорость: 1.0x</span>
+
+        <!-- Добавленные элементы в разметке -->
+        <input type="number" id="offsetInput" value="0">
+		<button onclick="decreaseOffset()">Время назад</button>
+        <button onclick="increaseOffset()">Время вперед</button>
+        
     </div>
 
     <div id="audioContent">
@@ -48,12 +54,7 @@
             <br />
 			
 			
-			
-			
-			
-			
-			
-			<p></p>
+            <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Алло. добрый день, это Виктория Бигдата.</p>
 <p>222 Добрый день, да, удобно.</p>
 <p>111Так, я по поводу вашего письма, по поводу возврата. Все проверили специалисты, информацию мне передали, звоню тоже с вами этот момент разобрать. Смотрите, дело в том, что у вас в договоре лицензионном указано, что единовременный лицензионный платеж это безвозвратная фиксированная сумма. Это лицензионный платеж за франшизу, она фиксированная сумма и она является безвозвратной частью в договоре лицензионного, именно это указано, который БД-352. И указано, что исключение составляют условия, которые указаны в этом же договоре, пункт 5.3. То есть по этому пункту, если к нему обращаемся, указано, что если вы не достигли оборота определенного за 4 месяца с момента оплаты единовременного платежа, то сумма может быть возвращена. Но здесь указано, что данный оборот вы сможете достичь, выполняя обязательства, которые указаны в пунктах по КПИ.</p>
@@ -80,13 +81,12 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОГОЖИНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(993)">0:16:33</a>  Так, и тогда просто пусть тогда связываются, как бы не просто, ну, просто, или хотя бы скажите, к кому, если что, обратиться, чтобы, ну, сейчас прошло 2 месяца, да, уже, по сути, я дождала, думала, деньги придут, да, поэтому, как бы, да, тут получается, что сейчас просто уже будете отмалчиваться, мне хотя бы понимать, что-то ждать или не ждать, ну, как бы, вообще, что делать. Вот, котель-то носила, ну, хоть хочется обсуждать дальше этот момент, то есть, ну, как бы, давайте, да, вы передайте, на следующей неделе тогда буду, знаешь, собственно, создать, мне туда еще раз туда напишу.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1024)">0:17:04</a>  Угу, хорошо, хорошо, я вас поняла, тогда информацию передам. Спасибо. Ну, ладно, давайте, тогда до связи, вам хорошего вечера. Спасибо, до свидания.</p>
 <p></p>
-			
-			
-			
-			
-			
-			
-        </div>
+       
+
+
+
+
+	   </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
@@ -100,7 +100,8 @@
         }
 
         function jumpToTime(seconds) {
-            const startTime = seconds - 3;
+            const offset = parseFloat(document.getElementById('offsetInput').value) || 0;
+            const startTime = seconds + offset;
             const hours = Math.floor(startTime / 3600);
             const minutes = Math.floor((startTime % 3600) / 60);
             const remainingSeconds = startTime % 60;
@@ -110,7 +111,7 @@
             
             setTimeout(() => {
                 audioPlayer.play();
-                console.log(`Jumping to time: ${formattedTime}`);
+                console.log(`Jumping to time: ${formattedTime} (with offset: ${offset})`);
             }, 2000);
         }
 
@@ -126,6 +127,17 @@
         function changeSpeed(amount) {
             audioPlayer.playbackRate += amount;
             speedIndicator.textContent = `Скорость: ${audioPlayer.playbackRate.toFixed(1)}x`;
+        }
+
+        function increaseOffset() {
+            const offsetInput = document.getElementById('offsetInput');
+            offsetInput.value = parseFloat(offsetInput.value) + 1;
+        }
+
+        function decreaseOffset() {
+            const offsetInput = document.getElementById('offsetInput');
+            offsetInput.value = parseFloat(offsetInput.value) - 1;
+            jumpToTime(audioPlayer.currentTime); // Применяем новое смещение времени сразу
         }
 
         window.onload = function() {
