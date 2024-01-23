@@ -44,8 +44,8 @@
 
         <!-- Добавленные элементы в разметке -->
         <input type="number" id="offsetInput" value="0">
-		<button onclick="decreaseOffset()">Время назад</button>
-        <button onclick="increaseOffset()">Время вперед</button>
+        <button onclick="updateOffset(1)">Время вперед</button>
+        <button onclick="updateOffset(-1)">Время назад</button>
         
     </div>
 
@@ -53,7 +53,7 @@
         <div class="editable" contenteditable="true" id="editableText">
             <br />
 			
-		
+        
        <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Приболел, но как бы уже финальная часть.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(5)">0:00:05</a>  Анна, добрый день. Так, ага, Виолетта вам прислала счет, мне она также продублировала. Я сходила, сверилась с вашим доп. соглашением. У вас эта оплата, она приписана в доп. соглашении. Так, сейчас скажу.</p>
@@ -150,7 +150,7 @@
 
 
 
-	   </div>
+       </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
@@ -158,6 +158,10 @@
         const audioPlayer = document.getElementById('audioPlayer');
         const editableText = document.getElementById('editableText');
         const speedIndicator = document.getElementById('speedIndicator');
+
+        audioPlayer.onerror = function() {
+            alert('Произошла ошибка при воспроизведении аудио.');
+        };
 
         function skip(time) {
             audioPlayer.currentTime += time;
@@ -171,12 +175,13 @@
             const remainingSeconds = startTime % 60;
 
             const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
-            audioPlayer.currentTime = startTime;
             
-            setTimeout(() => {
+            audioPlayer.oncanplay = function() {
                 audioPlayer.play();
                 console.log(`Jumping to time: ${formattedTime} (with offset: ${offset})`);
-            }, 2000);
+            };
+            
+            audioPlayer.currentTime = startTime;
         }
 
         function padZero(num) {
@@ -193,14 +198,9 @@
             speedIndicator.textContent = `Скорость: ${audioPlayer.playbackRate.toFixed(1)}x`;
         }
 
-        function increaseOffset() {
+        function updateOffset(amount) {
             const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) + 1;
-        }
-
-        function decreaseOffset() {
-            const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) - 1;
+            offsetInput.value = parseFloat(offsetInput.value) + amount;
             jumpToTime(audioPlayer.currentTime); // Применяем новое смещение времени сразу
         }
 
