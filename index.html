@@ -15,17 +15,17 @@
             padding: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         #audioContent {
             margin-top: 50px;
         }
-        
+
         .editable {
             border: 1px solid #ddd;
             padding: 5px;
             margin-bottom: 10px;
         }
-        
+
         #stepIndicator,
         #speedIndicator {
             margin-left: 10px;
@@ -53,26 +53,21 @@
         <button onclick="decreaseStep()">-</button>
 		<span id="stepIndicator">Шаг перемотки: 1 секунда</span>
         <button onclick="increaseStep()">+</button>
-		
+
         <button onclick="changeSpeed(-0.1)">"-" speed</button>
         <button onclick="changeSpeed(0.1)">+"speed</button>
         <span id="speedIndicator">Speed: 1.0x</span>
 
         <!-- Добавленные элементы в разметке -->
-        
+
         <button onclick="updateOffset(-1)">тайм-код🔼</button>
         <button onclick="updateOffset(1)">тайм-код🔽</button>
 		<input type="number" id="offsetInput" value="0"style="width: 40px;">
-		
-        
+
+
     </div>
 
-    <div id="audioContent">
-        <div class="editable" contenteditable="true" id="editableText">
-            <br />
-			
-        
-            <p></p>
+    <div id="audioContent"><p></p>
 <p>ШКРЫЛЬ <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a> ….Яна?</p>
 <p>ЯНА <a href="javascript:void(0);" onclick="jumpToTime(2)">0:00:02</a> У вас там что-то свистит. В наушниках.</p>
 <p>ШКРЫЛЬ <a href="javascript:void(0);" onclick="jumpToTime(6)">0:00:06</a> Не могу понять. Где тут что? Попробую отстроить. Не должно у меня ничего свистеть. Как сейчас?</p>
@@ -215,12 +210,7 @@
 <p><span class="name1">ЯНА</span>  <a href="javascript:void(0);" onclick="jumpToTime(2159)">0:35:59</a>  Тогда вам доброй ночи, да, хорошего завершения дня, тогда</p>
 <p><span class="name1">ШКРЫЛЬ</span>  <a href="javascript:void(0);" onclick="jumpToTime(2163)">0:36:03</a>  на связи. Хорошо. Всего доброго, Яна.</p>
 <p></p>
-<p></p>
-
-
-
-
-        </div>
+<p></p></div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
@@ -280,12 +270,12 @@
             const remainingSeconds = startTime % 60;
 
             const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
-            
+
             audioPlayer.oncanplay = function() {
                 audioPlayer.play();
                 console.log(`Jumping to time: ${formattedTime} (with offset: ${offset})`);
             };
-            
+
             audioPlayer.currentTime = startTime;
         }
 
