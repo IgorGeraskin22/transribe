@@ -28,6 +28,17 @@
         #speedIndicator {
             margin-left: 10px;
         }
+
+        #offsetInput {
+            width: 70px; /* Новый стиль для поля ввода */
+            padding: 5px; /* Добавление внутреннего отступа */
+            margin-right: 10px; /* Добавление правого внешнего отступа */
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -46,15 +57,16 @@
         <input type="number" id="offsetInput" value="0">
         <button onclick="updateOffset(1)">Время вперед</button>
         <button onclick="updateOffset(-1)">Время назад</button>
-        
     </div>
 
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
             <br />
 			
-        
-       <p></p>
+			
+			
+			
+            <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Приболел, но как бы уже финальная часть.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(5)">0:00:05</a>  Анна, добрый день. Так, ага, Виолетта вам прислала счет, мне она также продублировала. Я сходила, сверилась с вашим доп. соглашением. У вас эта оплата, она приписана в доп. соглашении. Так, сейчас скажу.</p>
 <p>222 Это прописано как …, правильно? Вот по пункту, если мы не выполняем обязательства.</p>
@@ -146,10 +158,12 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1852)">0:30:52</a>  Сляжешь здесь, да? Все, спасибо, будем работать. Спасибо, Виктория, большое.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1858)">0:30:58</a>  Давайте, на связи, если что. До свидания.</p>
 <p></p>
-
-
-
-
+			
+			
+			
+			
+			
+			
        </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
