@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editable Content</title>
-    <style>
+     <style>
         #audioContainer {
             position: fixed;
             top: 0;
@@ -26,8 +25,14 @@
             margin-bottom: 10px;
         }
         
-        #stepIndicator {
+        #speedIndicator {
             margin-left: 10px;
+        }
+
+        #offsetInput {
+            width: 40px;
+            padding: 5px;
+            margin-right: 10px;
         }
 
         button {
@@ -40,30 +45,22 @@
         }
     </style>
 </head>
-
 <body>
     <div id="audioContainer">
         <audio id="audioPlayer" controls>
             <source src="https://github.com/IgorGeraskin22/transribe/raw/gh-pages/1.mp3">
             Ваш браузер не поддерживает аудиоэлемент.
         </audio>
-		
-		<!-- Перемотка Вперед -Назад -->
-        <button onclick="skip(-step)">⏪</button>
-        <button onclick="skip(step)">⏩</button>
-        <button onclick="decreaseStep()">-</button>
-        <button onclick="increaseStep()">+</button>
-        <span id="stepIndicator">Шаг перемотки: 1 секунда</span>
-		
-		<!-- Измение скрости воспроизведения -->
-		<button onclick="changeSpeed(-0.1)">"-" скорость</button>
-        <button onclick="changeSpeed(0.1)">"+"скорость</button>
+        <button onclick="skip(-2)">⏪</button>
+        <button onclick="skip(2)">⏩</button>
+        <button onclick="changeSpeed(-0.1)">"-" speed</button>
+        <button onclick="changeSpeed(0.1)">"+"speed</button>
         <span id="speedIndicator">Speed: 1.0x</span>
 
-        <!-- При клике на тайм код Плеер включитьсь на Х секунд раньше тайм-кода или позже  -->
+        <!-- Добавленные элементы в разметке -->
         <input type="number" id="offsetInput" value="0">
         <button onclick="updateOffset(-1)">тайм-код🔼</button>
-        <button onclick="updateOffset(1)">тайм-код🔽</button>
+		<button onclick="updateOffset(1)">тайм-код🔽</button>
         
     </div>
 
@@ -72,7 +69,7 @@
             <br />
 			
         
-            <p></p>
+       <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ТИМОФЕЕВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Да, да, да, ждем вас.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">МАРИЯ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(4)">0:00:04</a>  Хорошо. Как у вас дела?</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ТИМОФЕЕВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(9)">0:00:09</a>  Ну...</p>
@@ -221,50 +218,21 @@
 
 
 
-        </div>
+       </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
         const editableText = document.getElementById('editableText');
-        const stepIndicator = document.getElementById('stepIndicator');
-        let step = 1;  // Исходный шаг перемотки
+        const speedIndicator = document.getElementById('speedIndicator');
 
-        audioPlayer.onerror = function () {
-            document.getElementById('audioPlayer').innerHTML = 'Ваш браузер не поддерживает аудиоэлемент.';
+        audioPlayer.onerror = function() {
+            alert('Произошла ошибка при воспроизведении аудио.');
         };
 
         function skip(time) {
-            const newTime = audioPlayer.currentTime + time;
-            audioPlayer.currentTime = newTime >= 0 ? newTime : 0;
-        }
-
-        function increaseStep() {
-            step += 1;
-            updateStepIndicator();
-        }
-
-        function decreaseStep() {
-            if (step > 1) {
-                step -= 1;
-                updateStepIndicator();
-            }
-        }
-
-        function updateStepIndicator() {
-            stepIndicator.textContent = `Шаг перемотки: ${step} секунд`;
-        }
-
-        function saveContent() {
-            localStorage.setItem('editableContent', editableText.innerHTML);
-            alert('Текст сохранен локально!');
-        }
-
-        function updateOffset(amount) {
-            const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) + amount;
-            jumpToTime(audioPlayer.currentTime); // Применяем новое смещение времени сразу
+            audioPlayer.currentTime += time;
         }
 
         function jumpToTime(seconds) {
@@ -288,13 +256,28 @@
             return num.toString().padStart(2, '0');
         }
 
-        window.addEventListener('load', function () {
+        function saveContent() {
+            localStorage.setItem('editableContent', editableText.innerHTML);
+            alert('Текст сохранен локально!');
+        }
+
+        function changeSpeed(amount) {
+            audioPlayer.playbackRate += amount;
+            speedIndicator.textContent = `Скорость: ${audioPlayer.playbackRate.toFixed(1)}x`;
+        }
+
+        function updateOffset(amount) {
+            const offsetInput = document.getElementById('offsetInput');
+            offsetInput.value = parseFloat(offsetInput.value) + amount;
+            jumpToTime(audioPlayer.currentTime); // Применяем новое смещение времени сразу
+        }
+
+        window.onload = function() {
             const storedContent = localStorage.getItem('editableContent');
             if (storedContent) {
                 editableText.innerHTML = storedContent;
             }
-        });
+        }
     </script>
 </body>
-
 </html>
