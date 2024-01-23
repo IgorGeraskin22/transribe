@@ -38,14 +38,14 @@
         </audio>
         <button onclick="skip(-2)">⏪</button>
         <button onclick="skip(2)">⏩</button>
-        <button onclick="changeSpeed(-0.1)">Уменьшить скорость</button>
-        <button onclick="changeSpeed(0.1)">Увеличить скорость</button>
-        <span id="speedIndicator">Скорость: 1.0x</span>
+        <button onclick="changeSpeed(-0.1)">"-" speed</button>
+        <button onclick="changeSpeed(0.1)">"+"speed</button>
+        <span id="speedIndicator">Speed: 1.0x</span>
 
         <!-- Добавленные элементы в разметке -->
         <input type="number" id="offsetInput" value="0">
-        <button onclick="updateOffset(1)">Время вперед</button>
-        <button onclick="updateOffset(-1)">Время назад</button>
+        <button onclick="updateOffset(-1)">тайм-код🔼</button>
+		<button onclick="updateOffset(1)">тайм-код🔽</button>
         
     </div>
 
