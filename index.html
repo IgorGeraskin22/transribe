@@ -14,6 +14,8 @@
             z-index: 9999;
             padding: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
         }
 
         #audioContent {
@@ -35,28 +37,35 @@
 <body>
     <div id="audioContainer">
         <audio id="audioPlayer" controls>
-            <source src="https://github.com/IgorGeraskin22/transribe/raw/gh-pages/1.mp3">
+            <source src="https://igorgeraskin22.github.io/transribe/1.mp3">
             Ваш браузер не поддерживает аудиоэлемент.
         </audio>
-        <button onclick="skip(-2)">⏪</button>
-        <button onclick="skip(2)">⏩</button>
-        <button onclick="changeSpeed(-0.1)">"-"скорость</button>
-        <button onclick="changeSpeed(0.1)">"+"скорость</button>
-        <span id="speedIndicator">Скорость: 1.0x</span>
-
+        <div>
+            <button onclick="skip(-2)">⏪</button>
+            <button onclick="skip(2)">⏩</button>
+            <button onclick="changeSpeed(-0.1)">- скорость</button>
+            <button onclick="changeSpeed(0.1)">+ скорость</button>
+            <span id="speedIndicator">Скорость: 1.0x</span>
+        </div>
         <!-- Добавленные элементы в разметке -->
-        <input type="number" id="offsetInput" placeholder="Введите смещение времени (секунды)" value="0">
-        <button onclick="updateOffset(1)">Время вперед</button>
-        <button onclick="updateOffset(-1)">Время назад</button>
+        <div>
+            <input type="number" id="offsetInput" value="0">
+            <span>Введите смещение времени (секунды)</span>
+            <button onclick="updateOffset(1)">Время вперед</button>
+            <button onclick="updateOffset(-1)">Время назад</button>
+        </div>
     </div>
 
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
             <br />
-			
-			
 
-            <p></p>
+
+
+
+
+           
+		   <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Приболел, но как бы уже финальная часть.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(5)">0:00:05</a>  Анна, добрый день. Так, ага, Виолетта вам прислала счет, мне она также продублировала. Я сходила, сверилась с вашим доп. соглашением. У вас эта оплата, она приписана в доп. соглашении. Так, сейчас скажу.</p>
 <p>222 Это прописано как …, правильно? Вот по пункту, если мы не выполняем обязательства.</p>
@@ -148,15 +157,17 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1852)">0:30:52</a>  Сляжешь здесь, да? Все, спасибо, будем работать. Спасибо, Виктория, большое.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1858)">0:30:58</a>  Давайте, на связи, если что. До свидания.</p>
 <p></p>
-      
-
-
-
-
-
-
-
-	  </div>
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+        </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
