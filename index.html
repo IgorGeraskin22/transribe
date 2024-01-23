@@ -48,13 +48,16 @@
             <source src="https://github.com/IgorGeraskin22/transribe/raw/gh-pages/1.mp3">
             Ваш браузер не поддерживает аудиоэлемент.
         </audio>
-        <button onclick="skip(-step)">⏪</button>
+        <input type="number" id="offsetInput" value="0" style="width: 40px;">
+		<button onclick="skip(-step)">⏪</button>
         <button onclick="skip(step)">⏩</button>
         <button onclick="decreaseStep()">-</button>
+		<span id="stepIndicator">Шаг перемотки: 1 секунда</span>
         <button onclick="increaseStep()">+</button>
+		
         <button onclick="changeSpeed(-0.1)">"-" speed</button>
         <button onclick="changeSpeed(0.1)">+"speed</button>
-        <span id="stepIndicator">Шаг перемотки: 1 секунда</span>
+        
         <span id="speedIndicator">Speed: 1.0x</span>
 
         <!-- Добавленные элементы в разметке -->
