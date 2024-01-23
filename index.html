@@ -107,8 +107,9 @@
             document.getElementById('audioPlayer').innerHTML = 'Ваш браузер не поддерживает аудиоэлемент.';
         };
 
-        function skip() {
-            audioPlayer.currentTime += step;
+        function skip(time) {
+            const newTime = audioPlayer.currentTime + time;
+            audioPlayer.currentTime = newTime >= 0 ? newTime : 0;
         }
 
         function increaseStep() {
