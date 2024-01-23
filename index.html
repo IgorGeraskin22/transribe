@@ -5,29 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editable Content</title>
     <style>
-        #audioContainer {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: white;
-            z-index: 9999;
-            padding: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        #audioContent {
-            margin-top: 50px;
-        }
-        
-        .editable {
-            border: 1px solid #ddd;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-        
-        #speedIndicator {
-            margin-left: 10px;
-        }
+        /* Стили остаются неизменными */
     </style>
 </head>
 <body>
@@ -36,25 +14,28 @@
             <source src="https://github.com/IgorGeraskin22/transribe/raw/gh-pages/1.mp3">
             Ваш браузер не поддерживает аудиоэлемент.
         </audio>
-        <button onclick="skip(-2)">Назад</button>
-        <button onclick="skip(2)">Вперёд</button>
+        <button onclick="skip(-2)">⏪</button>
+        <button onclick="skip(2)">⏩</button>
         <button onclick="changeSpeed(-0.1)">Уменьшить скорость</button>
         <button onclick="changeSpeed(0.1)">Увеличить скорость</button>
         <span id="speedIndicator">Скорость: 1.0x</span>
 
-        <!-- Добавленные элементы в разметке -->
-        <input type="number" id="offsetInput" value="0">
-		<button onclick="decreaseOffset()">Время назад</button>
+        <label for="stepInput">Шаг:</label>
+        <input type="number" id="stepInput" value="1">
+        <button onclick="decreaseOffset()">Время назад</button>
         <button onclick="increaseOffset()">Время вперед</button>
-        
     </div>
 
     <div id="audioContent">
         <div class="editable" contenteditable="true" id="editableText">
             <br />
 			
-		
-       <p></p>
+			
+			
+			
+			
+			
+            <p></p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(0)">0:00:00</a>  Приболел, но как бы уже финальная часть.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(5)">0:00:05</a>  Анна, добрый день. Так, ага, Виолетта вам прислала счет, мне она также продублировала. Я сходила, сверилась с вашим доп. соглашением. У вас эта оплата, она приписана в доп. соглашении. Так, сейчас скажу.</p>
 <p>222 Это прописано как …, правильно? Вот по пункту, если мы не выполняем обязательства.</p>
@@ -146,11 +127,15 @@
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">РОДНОВ</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1852)">0:30:52</a>  Сляжешь здесь, да? Все, спасибо, будем работать. Спасибо, Виктория, большое.</p>
 <p><span style="color: 000000; font-weight: bold;"><span class="name1">ЯНА</span></span>  <a href="javascript:void(0);" onclick="jumpToTime(1858)">0:30:58</a>  Давайте, на связи, если что. До свидания.</p>
 <p></p>
-
-
-
-
-	   </div>
+			
+			
+			
+			
+			
+			
+			
+			
+        </div>
         <button onclick="saveContent()">Сохранить</button>
     </div>
 
@@ -158,6 +143,7 @@
         const audioPlayer = document.getElementById('audioPlayer');
         const editableText = document.getElementById('editableText');
         const speedIndicator = document.getElementById('speedIndicator');
+        const stepInput = document.getElementById('stepInput');
 
         function skip(time) {
             audioPlayer.currentTime += time;
@@ -193,15 +179,16 @@
             speedIndicator.textContent = `Скорость: ${audioPlayer.playbackRate.toFixed(1)}x`;
         }
 
-        function increaseOffset() {
-            const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) + 1;
-        }
-
         function decreaseOffset() {
             const offsetInput = document.getElementById('offsetInput');
-            offsetInput.value = parseFloat(offsetInput.value) - 1;
-            jumpToTime(audioPlayer.currentTime); // Применяем новое смещение времени сразу
+            offsetInput.value = parseFloat(offsetInput.value) - parseFloat(stepInput.value);
+            jumpToTime(audioPlayer.currentTime);
+        }
+
+        function increaseOffset() {
+            const offsetInput = document.getElementById('offsetInput');
+            offsetInput.value = parseFloat(offsetInput.value) + parseFloat(stepInput.value);
+            jumpToTime(audioPlayer.currentTime);
         }
 
         window.onload = function() {
